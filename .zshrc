@@ -13,6 +13,7 @@ eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
 
 # Aliases
 alias v=nvim
+alias ll="ls -la" 
 alias lm="ls -lma"
 
 

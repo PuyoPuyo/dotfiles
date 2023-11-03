@@ -1,2 +1,4 @@
 .git
 .config/tmux/plugins/*
+.config/karabiner
+.config/iterm2

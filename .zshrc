@@ -15,6 +15,8 @@ eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
 alias v=nvim
 alias ll="ls -la" 
 alias lm="ls -lma"
+alias cls="clear"
+alias md="mkdir"
 
 
 # https://github.com/Homebrew/brew/issues/3933#issuecomment-373771217

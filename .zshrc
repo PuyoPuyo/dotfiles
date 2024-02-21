@@ -5,6 +5,11 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
 
+path+=('/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp')
+export PATH
+
+export TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-5.9.2-RELEASE.xctoolchain
+
 # Init zoxide
 eval "$(zoxide init zsh)"
 
@@ -12,11 +17,13 @@ eval "$(zoxide init zsh)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
 
 # Aliases
+alias startmtn="shortcuts run 'Start My Next Meeting'"
 alias v=nvim
 alias ll="ls -la" 
 alias lm="ls -lma"
 alias cls="clear"
 alias md="mkdir"
+alias fzfp="fzf --preview cat" 
 
 
 # https://github.com/Homebrew/brew/issues/3933#issuecomment-373771217
@@ -32,3 +39,5 @@ newbrew() {
 done
 }
 
+eval "$(~/.local/bin/mise activate bash)"
+export PATH="$HOME/.local/share/mise/shims:$PATH"

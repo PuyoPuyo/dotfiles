@@ -52,6 +52,7 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
@@ -74,6 +75,28 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+-- Swift installation
+require("lspconfig").sourcekit.setup(
+	{
+		capabilities = capabilities,
+		on_attach = function(arg1, arg2)
+			vim.keymap.set('n', '<leader>dp', require "xbase.pickers.builtin".actions, { desc = "XBase picker" })
+			vim.keymap.set('n', '<leader>dl', function()
+				require "xbase.logger".toggle(false, true)
+				end, { desc = "XBase logger" })
+			return on_attach(arg1, arg2)
+		end,
+		filetypes = { "swift" },
+		root_dir = require("lspconfig").util.root_pattern("*.xcodeproj", "*.xcworkspace", "Package.swift", ".git", "project.yml", "Project.swift"),
+		cmd = {
+			"xcrun",
+			"sourcekit-lsp",
+			"--log-level",
+			"debug"
+		}
+	}
+)
 
 -- Example custom configuration for lua
 --

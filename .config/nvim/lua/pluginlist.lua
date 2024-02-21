@@ -77,4 +77,30 @@ return {
 		config = function() require("nvim-autopairs").setup {} end
 	},
 
+	{
+		'xbase-lab/xbase',
+		dependencies = {
+			'neovim/nvim-lspconfig',
+		},
+		build = "make install",
+		config = function()
+			require 'xbase'.setup {
+				log_level = vim.log.levels.DEBUG,
+				simctl = {
+					iOS = {
+						"iPhone 15 Pro"
+					}
+				},
+				mappings = {
+					build_picker = 0,
+					run_picker = 0,
+					watch_picker = 0,
+					all_picker = 0,
+					toggle_split_log_buffer = 0,
+					toggle_vsplit_log_buffer = 0
+				}
+			}
+		end
+	},
+
 }

@@ -20,6 +20,10 @@ vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", {noremap=true
 vim.api.nvim_set_keymap("n", "<C-W>.", ":vertical resize +10<CR>", {noremap=true})
 vim.keymap.set('n', '<space><space>', "<cmd>set nohlsearch<CR>")
 
+-- quickfix
+vim.api.nvim_set_keymap("n", "]q", ":cn<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "[q", ":cp<CR>", {noremap=true})
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })

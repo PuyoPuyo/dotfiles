@@ -10,8 +10,20 @@ export PATH
 
 export TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-5.9.2-RELEASE.xctoolchain
 
+# Fzf options
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+
 # Init zoxide
 eval "$(zoxide init zsh)"
+
+# Init fzf
+source <(fzf --zsh)
+
+# Init histfile
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 # Add ssh keys to keychain
 eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
@@ -23,8 +35,8 @@ alias ll="ls -la"
 alias lm="ls -lma"
 alias cls="clear"
 alias md="mkdir"
-alias fzfp="fzf --preview cat" 
-
+alias fzfp="fzf --preview 'bat --color=always {}'" 
+alias inv="nvim $(fzf -m --preview 'bat --color=always {}')"
 
 # https://github.com/Homebrew/brew/issues/3933#issuecomment-373771217
 # Script used for maintaining an up to date Brewfile for configfiles

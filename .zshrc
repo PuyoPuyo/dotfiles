@@ -13,8 +13,9 @@ export TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-5.9.2-RELEASE.xctoolch
 # Fzf options
 export FZF_DEFAULT_OPTS="
 --ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'
---bind='ctrl-e:execute(echo {+} | xargs -o nvim)'
---bind='F2:toggle-preview'
+--bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+--bind 'F2:toggle-preview'
+--bind 'ctrl-j:down,ctrl-k:up,ctrl-h:preview-down,ctrl-l:preview-up'
 "
 
 # Init zoxide

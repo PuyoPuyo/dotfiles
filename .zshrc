@@ -11,7 +11,11 @@ export PATH
 export TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-5.9.2-RELEASE.xctoolchain
 
 # Fzf options
-export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+export FZF_DEFAULT_OPTS="
+--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'
+--bind='ctrl-e:execute(echo {+} | xargs -o nvim)'
+--bind='F2:toggle-preview'
+"
 
 # Init zoxide
 eval "$(zoxide init zsh)"

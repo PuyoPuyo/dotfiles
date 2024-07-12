@@ -1,7 +1,22 @@
-# Starship
+#======Inits======
+# Init starship 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
+# Init fzf
+source <(fzf --zsh)
+
+# Init zoxide
+eval "$(zoxide init zsh)"
+
+# Init histfile
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+
+#======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
 
@@ -18,22 +33,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-j:down,ctrl-k:up,ctrl-h:preview-down,ctrl-l:preview-up'
 "
 
-# Init zoxide
-eval "$(zoxide init zsh)"
-
-# Init fzf
-source <(fzf --zsh)
-
-# Init histfile
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory
-
-# Add ssh keys to keychain
-eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
-
-# Aliases
+#======Aliases======
 alias startmtn="shortcuts run 'Start My Next Meeting'"
 alias v=nvim
 alias ll="ls -la" 
@@ -41,8 +41,11 @@ alias lm="ls -lma"
 alias cls="clear"
 alias md="mkdir"
 alias fzfp="fzf --preview 'bat --color=always {}'" 
-alias inv="nvim $(fzf -m --preview 'bat --color=always {}')"
 
+# Add ssh keys to keychain
+eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
+
+#======Functions======
 # https://github.com/Homebrew/brew/issues/3933#issuecomment-373771217
 # Script used for maintaining an up to date Brewfile for configfiles
 newbrew() {
@@ -56,5 +59,22 @@ newbrew() {
 done
 }
 
-eval "$(~/.local/bin/mise activate bash)"
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+fzg() {
+	# Switch between Ripgrep mode and fzf filtering mode (CTRL-T)
+	rm -f /tmp/rg-fzf-{r,f}
+	RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+	INITIAL_QUERY="${*:-}"
+	fzf --ansi --disabled --query "$INITIAL_QUERY" \
+		--bind "start:reload:$RG_PREFIX {q}" \
+		--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+		--bind 'ctrl-t:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
+		  echo "rebind(change)+change-prompt(1. ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
+		  echo "unbind(change)+change-prompt(2. fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
+		--color "hl:-1:underline,hl+:-1:underline:reverse" \
+		--prompt '1. ripgrep> ' \
+		--delimiter : \
+		--header 'CTRL-T: Switch between ripgrep/fzf' \
+		--preview 'bat --color=always {1} --highlight-line {2}' \
+		--preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+		--bind 'enter:become(vim {1} +{2})'
+}

@@ -15,6 +15,13 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
+if ! command -v "atuin" > /dev/null; then
+  # install foobar here
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+fi
+
+# Init atuin
+eval "$(atuin init zsh)"
 
 #======Exports======
 # Default editor nvim
@@ -78,3 +85,6 @@ fzg() {
 		--preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
 		--bind 'enter:become(vim {1} +{2})'
 }
+
+. "$HOME/.atuin/bin/env"
+

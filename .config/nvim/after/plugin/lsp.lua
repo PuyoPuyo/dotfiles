@@ -87,13 +87,11 @@ require("lspconfig").sourcekit.setup(
 				end, { desc = "XBase logger" })
 			return on_attach(arg1, arg2)
 		end,
-		filetypes = { "swift" },
+		filetypes = { "swift", "objcpp", "cpp", "h"},
 		root_dir = require("lspconfig").util.root_pattern("*.xcodeproj", "*.xcworkspace", "Package.swift", ".git", "project.yml", "Project.swift"),
 		cmd = {
 			"xcrun",
 			"sourcekit-lsp",
-			"--log-level",
-			"debug"
 		}
 	}
 )

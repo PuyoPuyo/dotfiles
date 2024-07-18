@@ -14,7 +14,9 @@ return {
 	},
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
+	'tpope/vim-obsession',
 	"tpope/vim-fugitive",
+	'lewis6991/gitsigns.nvim',
 
 	{
 		"catppuccin/nvim",
@@ -34,11 +36,10 @@ return {
             'saadparwaiz1/cmp_luasnip',
             'rafamadriz/friendly-snippets',
             'hrsh7th/cmp-nvim-lsp',
-            
         },
     },
 
-	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"} },
+	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
 	'theHamsta/nvim-dap-virtual-text',
 	{
 		'mfussenegger/nvim-dap-python',
@@ -51,19 +52,63 @@ return {
         build = ':TSUpdate',
     },
 
-
-    { 
+    {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' } 
+        dependencies = { 'nvim-lua/plenary.nvim' }
     },
 
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
+		cond = vim.fn.executable 'make' == 1 
     },
 
 	{	'nvim-telescope/telescope-symbols.nvim'},
-	{	'ThePrimeagen/harpoon'},
+	{
+		'ThePrimeagen/harpoon',
+		branch = "harpoon2",
+        dependencies = { 'nvim-lua/plenary.nvim' },
+	},
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+		  require("notify").setup({
+			background_colour = "#000000",
+			enabled = false,
+		  })
+		end
+	},
+
+	{
+		"folke/noice.nvim",
+		config = function()
+		  require("noice").setup({
+			-- add any options here
+			routes = {
+			  {
+				filter = {
+				  event = 'msg_show',
+				  any = {
+					{ find = '%d+L, %d+B' },
+					{ find = '; after #%d+' },
+					{ find = '; before #%d+' },
+					{ find = '%d fewer lines' },
+					{ find = '%d more lines' },
+				  },
+				},
+				opts = { skip = true },
+			  }
+			},
+		  })
+		end,
+		dependencies = {
+		  -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+		  "MunifTanjim/nui.nvim",
+		  "rcarriga/nvim-notify",
+		}
+	},
+
+
 	{
 		"folke/twilight.nvim",
 		opts = {
@@ -76,6 +121,19 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		config = function() require("nvim-autopairs").setup {} end
+	},
+
+	{
+		"wojciech-kulik/xcodebuild.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("xcodebuild").setup({
+			})
+		end,
 	},
 
 	{
@@ -103,5 +161,4 @@ return {
 			}
 		end
 	},
-
 }

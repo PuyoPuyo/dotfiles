@@ -8,11 +8,13 @@ source <(fzf --zsh)
 
 # Init zoxide
 eval "$(zoxide init zsh)"
+bindkey "ç" fzf-cd-widget
 
 # Init histfile
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+setopt INC_APPEND_HISTORY
 setopt appendhistory
 
 if ! command -v "atuin" > /dev/null; then
@@ -27,10 +29,11 @@ eval "$(atuin init zsh)"
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
 
-path+=('/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp')
-export PATH
 
-export TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-5.9.2-RELEASE.xctoolchain
+path+=('/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain/usr/bin/sourcekit-lsp')
+export PATH
+export TOOLCHAIN_PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain
+
 
 # Fzf options
 export FZF_DEFAULT_OPTS="
@@ -39,6 +42,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'F2:toggle-preview'
 --bind 'ctrl-j:down,ctrl-k:up,ctrl-h:preview-down,ctrl-l:preview-up'
 "
+
 
 #======Aliases======
 alias startmtn="shortcuts run 'Start My Next Meeting'"

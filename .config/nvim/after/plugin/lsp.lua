@@ -70,13 +70,24 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  if lsp == "clangd" then
+	require('lspconfig')[lsp].setup 
+	{
+		on_attach = on_attach,
+		capabilities = capabilities,
+		cmd = {"clangd", 
+		"--offset-encoding=utf-16"}
+	}
+  else 
+	require('lspconfig')[lsp].setup 
+	{
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
+  end
 end
 
--- Swift installation
+-- sourcekit installation
 require("lspconfig").sourcekit.setup(
 	{
 		capabilities = capabilities,
@@ -88,7 +99,15 @@ require("lspconfig").sourcekit.setup(
 			return on_attach(arg1, arg2)
 		end,
 		filetypes = { "swift", "objcpp", "cpp", "h"},
-		root_dir = require("lspconfig").util.root_pattern("*.xcodeproj", "*.xcworkspace", "Package.swift", ".git", "project.yml", "Project.swift"),
+-- "*.xcodeproj", "*.xcworkspace", "Project.swift", ".git", "project.yml",
+		root_dir = function(filename, _)
+			local util = require 'lspconfig.util'
+			return util.root_pattern('buildServer.json')(filename)
+			or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+			or util.find_git_ancestor(filename)
+			-- Leave this last for modularized apps
+			or util.root_pattern('compile_commands.json', 'Package.swift')(filename)
+		end,
 		cmd = {
 			"xcrun",
 			"sourcekit-lsp",

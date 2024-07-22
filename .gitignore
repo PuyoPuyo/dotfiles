@@ -1,8 +1,8 @@
 .git
 .config/tmux/plugins/*
 .config/iterm2
-<<<<<<< HEAD
 .config/karabiner*
-=======
 .config/raycast
->>>>>>> 84c1555 (Added fugitive and other keymaps)
+.config/opswat
+.config/mise
+.config/fish

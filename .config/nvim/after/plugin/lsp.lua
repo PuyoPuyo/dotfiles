@@ -91,15 +91,8 @@ end
 require("lspconfig").sourcekit.setup(
 	{
 		capabilities = capabilities,
-		on_attach = function(arg1, arg2)
-			vim.keymap.set('n', '<leader>dp', require "xbase.pickers.builtin".actions, { desc = "XBase picker" })
-			vim.keymap.set('n', '<leader>dl', function()
-				require "xbase.logger".toggle(false, true)
-				end, { desc = "XBase logger" })
-			return on_attach(arg1, arg2)
-		end,
+		on_attach = on_attach,
 		filetypes = { "swift", "objcpp", "cpp", "h"},
--- "*.xcodeproj", "*.xcworkspace", "Project.swift", ".git", "project.yml",
 		root_dir = function(filename, _)
 			local util = require 'lspconfig.util'
 			return util.root_pattern('buildServer.json')(filename)

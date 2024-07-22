@@ -25,6 +25,10 @@ fi
 # Init atuin
 eval "$(atuin init zsh)"
 
+# Init mise
+eval "$(/Users/tester/.local/bin/mise activate zsh)"
+
+
 #======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
@@ -91,4 +95,3 @@ fzg() {
 }
 
 . "$HOME/.atuin/bin/env"
-

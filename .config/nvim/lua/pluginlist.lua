@@ -1,6 +1,14 @@
 return {
-	{ 'numToStr/Comment.nvim', opts = {} },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
 
+		config = function()
+			require("catppuccin").setup()
+			vim.cmd.colorscheme("catppuccin-mocha")
+		end
+	},
 	{
 		"williamboman/mason.nvim",
 		opts = {
@@ -12,23 +20,14 @@ return {
 			},
 		},
 	},
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
 	'tpope/vim-obsession',
+
+	'numToStr/Comment.nvim', -- "gc" to comment
 	"tpope/vim-fugitive",
 	'lewis6991/gitsigns.nvim',
 
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-
-		config = function()
-			require("catppuccin").setup()
-			vim.cmd.colorscheme("catppuccin-mocha")
-		end
-	},
-
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
 	{
         'hrsh7th/nvim-cmp',
         dependencies = {
@@ -78,7 +77,7 @@ return {
 		  })
 		end
 	},
-
+	"nvim-lualine/lualine.nvim",
 	{
 		"folke/noice.nvim",
 		config = function()
@@ -108,7 +107,6 @@ return {
 		}
 	},
 
-
 	{
 		"folke/twilight.nvim",
 		opts = {
@@ -136,6 +134,7 @@ return {
 		end,
 	},
 
+	--[[
 	{
 		'xbase-lab/xbase',
 		dependencies = {
@@ -161,4 +160,6 @@ return {
 			}
 		end
 	},
+
+	--]]
 }

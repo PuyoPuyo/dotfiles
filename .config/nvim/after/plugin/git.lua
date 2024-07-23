@@ -1,4 +1,10 @@
-vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>",
+require("gitsigns").setup()
+
+vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk_inline<CR>",
+	{silent = true, noremap = true}
+	)
+
+vim.keymap.set("n", "<leader>gH", ":Gitsigns preview_hunk<CR>",
 	{silent = true, noremap = true}
 	)
 

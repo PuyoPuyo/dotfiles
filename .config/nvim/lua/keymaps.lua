@@ -14,6 +14,9 @@ vim.api.nvim_set_keymap("n", "td", ":bdelete<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "QQ", ":q!<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "WW", ":w!<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "ss", ":noh<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>sd", ":Zi<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>cf", ":let @+ = expand(\"%\")<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>cp", ":let @+ = expand(\"%:p\")<CR>", {noremap=true})
 
 -- splits
 vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", {noremap=true})

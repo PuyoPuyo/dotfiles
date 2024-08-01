@@ -21,9 +21,12 @@ return {
 		},
 	},
 	'tpope/vim-obsession',
+	'junegunn/fzf',
+	'junegunn/fzf',
+	'nanotee/zoxide.vim',
 
 	'numToStr/Comment.nvim', -- "gc" to comment
-	"tpope/vim-fugitive",
+	'tpope/vim-fugitive',
 	'lewis6991/gitsigns.nvim',
 
     "williamboman/mason-lspconfig.nvim",
@@ -57,6 +60,10 @@ return {
     },
 
     {
+        'nvim-telescope/telescope-ui-select.nvim',
+    },
+
+    {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
 		cond = vim.fn.executable 'make' == 1 
@@ -67,6 +74,12 @@ return {
 		'ThePrimeagen/harpoon',
 		branch = "harpoon2",
         dependencies = { 'nvim-lua/plenary.nvim' },
+	},
+	{
+	  "nvim-telescope/telescope-frecency.nvim",
+	  config = function()
+		require("telescope").load_extension "frecency"
+	  end,
 	},
 	{
 		"rcarriga/nvim-notify",

@@ -41,6 +41,7 @@ export TOOLCHAIN_PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/xcod
 
 # Fzf options
 export FZF_DEFAULT_OPTS="
+-m
 --ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'
 --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
 --bind 'F2:toggle-preview'

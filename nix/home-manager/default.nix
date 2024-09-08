@@ -15,15 +15,15 @@
   # Home Manager is pretty good at managing .config. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".zshrc".source = ~/.config/zshrc/;
-    ".config/starship".source = ~/.config/starship;
-    ".config/nvim".source = ~/.config/nvim;
-    ".config/nix".source = ~/.config/nix;
-    ".config/nix-darwin".source = ~/.config/nix-darwin;
-    ".config/tmux".source = ~/.config/tmux;
-    ".config/karabiner".source = ~/.config/karabiner;
-    ".config/atuin".source = ~/.config/atuin;
-    ".config/aerospace".source = ~/.config/aerospace;
+    ".zshrc".source = ~/dotfiles/zshrc/.zshrc;
+    ".config/starship".source = ~/dotfiles/starship;
+    ".config/nvim".source = ~/dotfiles/nvim;
+    ".config/nix-darwin".source = ~/dotfiles/nix/nix-darwin;
+    ".config/tmux".source = ~/dotfiles/tmux;
+    ".config/karabiner".source = ~/dotfiles/karabiner;
+    ".config/atuin".source = ~/dotfiles/atuin;
+    ".config/aerospace".source = ~/dotfiles/aerospace;
+    #".config/sketchybar".source = ~/dotfiles/sketchybar;
   };
 
   home.sessionVariables = {

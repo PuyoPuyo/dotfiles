@@ -17,11 +17,6 @@ SAVEHIST=10000
 setopt INC_APPEND_HISTORY
 setopt appendhistory
 
-if ! command -v "atuin" > /dev/null; then
-  # install foobar here
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-fi
-
 # Init atuin
 eval "$(atuin init zsh)"
 

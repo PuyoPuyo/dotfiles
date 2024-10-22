@@ -29,6 +29,11 @@ eval "$(atuin init zsh)"
 eval "$(/Users/tester/.local/bin/mise activate zsh)"
 
 
+#======Plugins======
+
+source ~/.zsh/antidote/antidote.zsh 
+antidote load ~/.zsh/pluginlist.txt
+
 #======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim

@@ -1,0 +1,4 @@
+# plugins for zsh
+zsh-users/zsh-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions kind:defer
+softmoth/zsh-vim-mode

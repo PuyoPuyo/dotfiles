@@ -17,13 +17,6 @@ SAVEHIST=10000
 setopt INC_APPEND_HISTORY
 setopt appendhistory
 
-if ! command -v "atuin" > /dev/null; then
-  # install foobar here
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-fi
-
-# Init atuin
-eval "$(atuin init zsh)"
 
 # Init mise
 eval "$(/Users/tester/.local/bin/mise activate zsh)"
@@ -33,6 +26,16 @@ eval "$(/Users/tester/.local/bin/mise activate zsh)"
 
 source ~/.zsh/antidote/antidote.zsh 
 antidote load ~/.zsh/pluginlist.txt
+
+
+#======Atuin======
+if [[ $(command -v "atuin"  > /dev/null) ]]; then
+  # install atuin 
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+fi
+
+# Init atuin
+eval "$(atuin init zsh)"
 
 #======Exports======
 # Default editor nvim

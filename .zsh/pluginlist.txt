@@ -1,4 +1,12 @@
-# plugins for zsh
+# Plugins for zsh
+
+# OMZ Sub-plugins 
+getantidote/use-omz
+
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+
+# Plugins
 zsh-users/zsh-syntax-highlighting kind:defer
 zsh-users/zsh-autosuggestions kind:defer
 softmoth/zsh-vim-mode

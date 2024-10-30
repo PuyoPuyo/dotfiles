@@ -28,6 +28,7 @@ return {
 	'numToStr/Comment.nvim', -- "gc" to comment
 	'tpope/vim-fugitive',
 	'lewis6991/gitsigns.nvim',
+	'github/copilot.vim',
 
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",

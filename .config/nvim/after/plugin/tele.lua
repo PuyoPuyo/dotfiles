@@ -6,6 +6,7 @@ local select_one_or_multi = function(prompt_bufnr)
 
     if vim.tbl_isempty(multi) then
         require('telescope.actions').select_default(prompt_bufnr)
+        vim.cmd(string.format("normal! zz"))
         return
     end
 
@@ -16,7 +17,7 @@ local select_one_or_multi = function(prompt_bufnr)
         local lcol = entry.col or 1
         if filename then
             vim.cmd(string.format("tabnew +%d %s", lnum, filename))
-            vim.cmd(string.format("normal! %dG%d|", lnum, lcol))
+            vim.cmd(string.format("normal! %dG%d|zz", lnum, lcol))
         end
     end
 end
@@ -31,6 +32,7 @@ require('telescope').setup {
         ['<C-d>'] = false,
         ["<C-j>"] = require('telescope.actions').move_selection_next,
         ["<C-k>"] = require('telescope.actions').move_selection_previous,
+        ["<C-p>"] = require('telescope.actions').add_selected_to_qflist,
       },
     },
   },
@@ -40,9 +42,26 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- Enable telescope Harpoon, if installed
-pcall(require('telescope').load_extension, 'Harpoon')
-vim.api.nvim_set_keymap("n", "<leader>m", ":lua require('harpoon'):list():add()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<leader>ht", ":lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>", {noremap=true})
+local harpoon = require('harpoon')
+harpoon:setup({})
+
+-- basic telescope configuration
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
 
 -- Enable telescope ui-select, if installed
 status, _ = pcall(require('telescope').load_extension, 'ui-select')

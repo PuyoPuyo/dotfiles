@@ -1,7 +1,7 @@
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", {noremap=false})
 
 -- twilight
-vim.api.nvim_set_keymap("n", "tw", ":Twilight<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "<leader>tw", ":Twilight<enter>", {noremap=false})
 
 -- buffers
 vim.api.nvim_set_keymap("n", "tk", ":bnext<enter>", {noremap=false})
@@ -10,18 +10,28 @@ vim.api.nvim_set_keymap("n", "th", ":bfirst<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "tl", ":blast<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "td", ":bdelete<enter>", {noremap=false})
 
+vim.api.nvim_set_keymap("n", "<leader>YA", 'gg"+yG', {noremap=false})
+
 -- files
 vim.api.nvim_set_keymap("n", "QQ", ":q!<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "QA", ":qa<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "WW", ":w!<enter>", {noremap=false})
+vim.api.nvim_set_keymap("n", "OO", ":only<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "ss", ":noh<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>sd", ":Zi<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>cf", ":let @+ = expand(\"%\")<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<leader>cp", ":let @+ = expand(\"%:p\")<CR>", {noremap=true})
 
 -- splits
-vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<C-W>.", ":vertical resize +10<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<C-Up>", "<cmd>resize +2<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<C-Down>", "<cmd>resize -2<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", {noremap=true})
 vim.keymap.set('n', '<space><space>', "<cmd>set nohlsearch<CR>")
+
+-- diffs
+vim.api.nvim_set_keymap("n", "<leader>dt", "<cmd>windo diffthis<cr>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<leader>do", "<cmd>diffoff!<cr>", {noremap=true})
 
 -- quickfix
 vim.api.nvim_set_keymap("n", "]q", ":cn<CR>", {noremap=true})
@@ -48,3 +58,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<space>LS", "<cmd>lua vim.diagnostic.show()<CR>", {noremap=false})
 vim.keymap.set("n", "<space>LH", "<cmd>lua vim.diagnostic.hide()<CR>", {noremap=false})
+
+-- custom functions
+vim.keymap.set("n", "<leader>fq", require('customfunctions').filter_quickfix_exclude_suffixes)

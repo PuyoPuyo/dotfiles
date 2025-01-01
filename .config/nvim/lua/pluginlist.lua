@@ -150,6 +150,51 @@ return {
 		config = function() require("nvim-autopairs").setup {} end
 	},
 
+    {
+      "folke/trouble.nvim",
+      opts = {
+        max_items = 500,
+      }, -- for default options, refer to the configuration section for custom setup.
+      cmd = "Trouble",
+      keys = {
+        {
+          "<leader>xx",
+          "<cmd>Trouble diagnostics toggle<cr>",
+          desc = "Diagnostics (Trouble)",
+        },
+        {
+          "<leader>xX",
+          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+          desc = "Buffer Diagnostics (Trouble)",
+        },
+        {
+          "<leader>cs",
+          "<cmd>Trouble symbols toggle focus=false<cr>",
+          desc = "Symbols (Trouble)",
+        },
+        {
+          "<leader>cl",
+          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+          desc = "LSP Definitions / references / ... (Trouble)",
+        },
+        {
+          "<leader>xL",
+          "<cmd>Trouble loclist toggle<cr>",
+          desc = "Location List (Trouble)",
+        },
+        {
+          "<leader>xQ",
+          "<cmd>Trouble qflist toggle win.type=split win.position=right<cr>",
+          desc = "Quickfix List (Trouble)",
+        },
+        {
+          "<leader>xH",
+          "<cmd>Trouble qflist toggle win.type=split win.position=bottom<cr>",
+          desc = "Quickfix List (Trouble)",
+        },
+      },
+    },
+
 	{
 		"wojciech-kulik/xcodebuild.nvim",
 		dependencies = {
@@ -162,7 +207,116 @@ return {
 			})
 		end,
 	},
+    {
+      "yetone/avante.nvim",
+      event = "VeryLazy",
+      lazy = false,
+      version = false, -- set this if you want to always pull the latest change
+      opts = {
+        mappings = {
+            sidebar = {
+              switch_windows = "<leader>ws",
+              reverse_switch_windows = "<S-Tab>",
+            },
+        },
 
+        file_selector = {
+            provider = "telescope"
+        },
+
+        provider = "claude", -- Recommend using Claude
+        auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+
+        vendors = {
+            ---@type AvanteProvider
+            claude_son = {
+                endpoint = "https://api.anthropic.com",
+                model = "claude-3-5-sonnet-20241022",
+                temperature = 0,
+                max_tokens = 4096,
+            },
+
+            ---@type AvanteProvider
+            ollama = {
+              endpoint = '127.0.0.1:11434/v1',
+              model = 'llama3.2',
+              parse_response_data = function(data_stream, event_state, opts)
+                require('avante.providers').copilot.parse_response(data_stream, event_state, opts)
+              end,
+              parse_curl_args = function(opts, code_opts)
+                return {
+                  url = opts.endpoint .. '/chat/completions',
+                  headers = {
+                    ['Accept'] = 'application/json',
+                    ['Content-Type'] = 'application/json',
+                  },
+                  body = {
+                    model = opts.model,
+                    messages = require('avante.providers').copilot.parse_messages(code_opts), 
+                    max_tokens = 4096,
+                    stream = true,
+                  },
+                }
+              end,
+            },
+
+            qwen = {
+                __inherited_from = "openai",
+                api_key_name = "",
+                endpoint = "http://127.0.0.1:11434/v1",
+                model = "qwen2.5-coder",
+                max_tokens = 4096,
+            }        
+        },
+
+        behaviour = {
+            auto_suggestions = false, -- Experimental stage
+            auto_set_highlight_group = true,
+            auto_set_keymaps = true,
+            auto_apply_diff_after_generation = false,
+            support_paste_from_clipboard = false,
+        },
+    
+        -- add any opts here
+      },
+      -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+      build = "make",
+      -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        --- The below dependencies are optional,
+        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        "zbirenbaum/copilot.lua", -- for providers='copilot'
+        {
+          -- support for image pasting
+          "HakonHarnes/img-clip.nvim",
+          event = "VeryLazy",
+          opts = {
+            -- recommended settings
+            default = {
+              embed_image_as_base64 = false,
+              prompt_for_file_name = false,
+              drag_and_drop = {
+                insert_mode = true,
+              },
+              -- required for Windows users
+              use_absolute_path = true,
+            },
+          },
+        },
+        {
+          -- Make sure to set this up properly if you have lazy=true
+          'MeanderingProgrammer/render-markdown.nvim',
+          opts = {
+            file_types = { "markdown", "Avante" },
+          },
+          ft = { "markdown", "Avante" },
+        },
+      },
+    },
 	--[[
 	{
 		'xbase-lab/xbase',

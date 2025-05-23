@@ -1,4 +1,5 @@
 .git
+.env
 .config/tmux/plugins/*
 .config/iterm2
 .config/karabiner*
@@ -6,3 +7,4 @@
 .config/opswat
 .config/mise
 .config/fish
+.config/github-copilot

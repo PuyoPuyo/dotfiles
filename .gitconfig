@@ -1,2 +1,10 @@
 [alias]
 	p = push
+[user]
+	email = spamfishts@gmail.com
+	name = Simeon
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

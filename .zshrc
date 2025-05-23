@@ -1,8 +1,4 @@
 #======Inits======
-# Init starship 
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
 # Init fzf
 source <(fzf --zsh)
 
@@ -17,16 +13,14 @@ SAVEHIST=10000
 setopt INC_APPEND_HISTORY
 setopt appendhistory
 
-
-# Init mise
-eval "$(/Users/tester/.local/bin/mise activate zsh)"
-
-
 #======Plugins======
-
 source ~/.zsh/antidote/antidote.zsh 
 antidote load ~/.zsh/pluginlist.txt
 
+#======Starship======
+# Init starship 
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 #======Atuin======
 if [[ $(command -v "atuin"  > /dev/null) ]]; then
@@ -35,7 +29,7 @@ if [[ $(command -v "atuin"  > /dev/null) ]]; then
 fi
 
 # Init atuin
-eval "$(atuin init zsh)"
+ eval "$(atuin init zsh)"
 
 #======Exports======
 # Default editor nvim
@@ -56,6 +50,8 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-j:down,ctrl-k:up,ctrl-h:preview-down,ctrl-l:preview-up'
 "
 
+#======.env=========
+setopt allexport ; . ./.env ; unsetopt allexport
 
 #======Aliases======
 alias startmtn="shortcuts run 'Start My Next Meeting'"
@@ -65,6 +61,7 @@ alias lm="ls -lma"
 alias cls="clear"
 alias md="mkdir"
 alias fzfp="fzf --preview 'bat --color=always {}'" 
+alias f='cd $(fd --type directory | fzf --preview "tree -C {}")'
 
 # Add ssh keys to keychain
 eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"
@@ -103,4 +100,4 @@ fzg() {
 		--bind 'enter:become(vim {1} +{2})'
 }
 
-. "$HOME/.atuin/bin/env"
+. "$HOME/.local/bin/env"

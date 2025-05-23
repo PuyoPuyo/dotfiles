@@ -19,7 +19,7 @@ source "$ANTIDOTEPATH/antidote/antidote.zsh"
 antidote load "$ANTIDOTEPATH/pluginlist.txt"
 
 #======Starship======
-# Init starship 
+# Init starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
@@ -28,6 +28,7 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 #======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
+export XDG_CONFIG_HOME=$HOME
 
 path+=('/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain/usr/bin/sourcekit-lsp')
 export PATH
@@ -49,11 +50,11 @@ setopt allexport ; . ./.env ; unsetopt allexport
 #======Aliases======
 alias startmtn="shortcuts run 'Start My Next Meeting'"
 alias v=nvim
-alias ll="ls -la" 
+alias ll="ls -la"
 alias lm="ls -lma"
 alias cls="clear"
 alias md="mkdir"
-alias fzfp="fzf --preview 'bat --color=always {}'" 
+alias fzfp="fzf --preview 'bat --color=always {}'"
 alias f='cd $(fd --type directory | fzf --preview "tree -C {}")'
 
 # Add ssh keys to keychain
@@ -94,5 +95,3 @@ fzg() {
 }
 
 . "$HOME/.local/bin/env"
-
-. "$HOME/.atuin/bin/env"

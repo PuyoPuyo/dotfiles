@@ -35,6 +35,7 @@ fi
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
 
+export XDG_CONFIG_HOME=$HOME
 
 path+=('/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain/usr/bin/sourcekit-lsp')
 export PATH

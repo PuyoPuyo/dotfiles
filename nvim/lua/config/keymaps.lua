@@ -60,4 +60,4 @@ vim.keymap.set("n", "<space>LS", "<cmd>lua vim.diagnostic.show()<CR>", {noremap=
 vim.keymap.set("n", "<space>LH", "<cmd>lua vim.diagnostic.hide()<CR>", {noremap=false})
 
 -- custom functions
-vim.keymap.set("n", "<leader>fq", require('customfunctions').filter_quickfix_exclude_suffixes)
+vim.keymap.set("n", "<leader>fq", require('config.customfunctions').filter_quickfix_exclude_suffixes)

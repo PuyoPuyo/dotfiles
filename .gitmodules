@@ -1,3 +1,31 @@
 [submodule ".zsh/antidote"]
 	path = .zsh/antidote
-	url = https://github.com/mattmc3/antidote
+    url = https://github.com/mattmc3/antidote
+
+[submodule "tmux/plugins/tpm"]
+    path = tmux/plugins/tpm
+    url = https://github.com/tmux-plugins/tpm.git
+
+[submodule "tmux/plugins/tmux-continuum"]
+	path = tmux/plugins/tmux-continuum
+    url = https://github.com/tmux-plugins/tmux-continuum
+
+[submodule "tmux/plugins/tmux-copycat"]
+	path = tmux/plugins/tmux-copycat
+    url = https://github.com/tmux-plugins/tmux-copycat
+
+[submodule "tmux/plugins/tmux-open"]
+	path = tmux/plugins/tmux-open
+    url = https://github.com/tmux-plugins/tmux-open
+
+[submodule "tmux/plugins/tmux-prefix-highlight"]
+	path = tmux/plugins/tmux-prefix-highlight
+    url = https://github.com/tmux-plugins/tmux-prefix-highlight
+
+[submodule "tmux/plugins/tmux-sidebar"]
+	path = tmux/plugins/tmux-sidebar
+    url = https://github.com/tmux-plugins/tmux-sidebar
+
+[submodule "tmux/plugins/tmux-urlview"]
+	path = tmux/plugins/tmux-urlview
+	url = https://github.com/tmux-plugins/tmux-urlview

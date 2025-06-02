@@ -1,4 +1,4 @@
-#======Inits======
+#=====Inits======
 # Init fzf
 source <(fzf --zsh)
 
@@ -14,8 +14,9 @@ setopt INC_APPEND_HISTORY
 setopt appendhistory
 
 #======Plugins======
-source ~/.zsh/antidote/antidote.zsh 
-antidote load ~/.zsh/pluginlist.txt
+ANTIDOTEPATH="$HOME/.config/.zsh"
+source "$ANTIDOTEPATH/antidote/antidote.zsh"
+antidote load "$ANTIDOTEPATH/pluginlist.txt"
 
 #======Starship======
 # Init starship 
@@ -23,19 +24,10 @@ eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 #======Atuin======
-if [[ $(command -v "atuin"  > /dev/null) ]]; then
-  # install atuin 
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-fi
-
-# Init atuin
- eval "$(atuin init zsh)"
 
 #======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
-
-export XDG_CONFIG_HOME=$HOME
 
 path+=('/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain/usr/bin/sourcekit-lsp')
 export PATH
@@ -102,3 +94,5 @@ fzg() {
 }
 
 . "$HOME/.local/bin/env"
+
+. "$HOME/.atuin/bin/env"

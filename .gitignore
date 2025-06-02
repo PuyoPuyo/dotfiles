@@ -1,6 +1,5 @@
 .git
 .env
-tmux/plugins/*
 term2
 karabiner
 raycast

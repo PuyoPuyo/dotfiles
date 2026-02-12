@@ -45,6 +45,15 @@ vim.keymap.set({ 'n'}, '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n'}, 'n', 'nzzzv')
 vim.keymap.set({ 'n'}, 'N', 'Nzzzv')
 
+-- mini.files keybindings
+vim.keymap.set("n", "-", function()
+  require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+end, {desc = "Open mini.files at current file directory"})
+
+vim.keymap.set("n", "<leader>fe", function()
+  require("mini.files").open(vim.loop.cwd(), true)
+end, {desc = "Open mini.files at root directory"})
+
 -- greatest remap ever, from primeagen
 vim.keymap.set({'x'}, "<leader>p", "\"_dP")
 

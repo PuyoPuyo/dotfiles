@@ -53,6 +53,11 @@ return {
 		'mfussenegger/nvim-dap-python',
 		ft = 'python',
 	},
+    {
+      'mrcjkb/rustaceanvim',
+      version = '^6', -- Recommended
+      lazy = false, -- This plugin is already lazy
+    },
 
 	-- Treesitter
 	{
@@ -142,11 +147,6 @@ return {
 			require('mini.comment').setup()
 		end
 	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function() require("nvim-autopairs").setup {} end
-	},
 
 	-- AI and Productivity
 	{
@@ -200,7 +200,7 @@ return {
 		config = function()
 			require("notify").setup({
 				background_colour = "#000000",
-				enabled = false,
+				enabled = true,
 			})
 		end
 	},
@@ -265,20 +265,15 @@ return {
     {
       "yetone/avante.nvim",
       event = "VeryLazy",
-      lazy = false,
-      version = false,
+      version = false, -- Never set this value to "*"! Never!
       opts = {
-        mappings = {
-            sidebar = {
-              switch_windows = "<leader>ws",
-              reverse_switch_windows = "<S-Tab>",
-            },
+        sidebar = {
+          switch_windows = "<leader>ws",
+          reverse_switch_windows = "<S-Tab>",
         },
-
         file_selector = {
             provider = "telescope"
         },
-
         provider = "claude",
         auto_suggestions_provider = "copilot",
 
@@ -323,16 +318,6 @@ return {
                 max_tokens = 4096,
             }        
         },
-
-        behaviour = {
-            auto_suggestions = false, -- Experimental stage
-            auto_set_highlight_group = true,
-            auto_set_keymaps = true,
-            auto_apply_diff_after_generation = false,
-            support_paste_from_clipboard = false,
-        },
-    
-        -- add any opts here
       },
       -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
       build = "make",
@@ -343,7 +328,9 @@ return {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
         --- The below dependencies are optional,
-        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+        "ibhagwan/fzf-lua", -- for file_selector provider fzf
+        "echasnovski/mini.icons", 
         "zbirenbaum/copilot.lua", -- for providers='copilot'
         {
           -- support for image pasting
@@ -430,6 +417,30 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require('mini.surround').setup()
+		end
+	},
+
+	{
+		"echasnovski/mini.files",
+		event = "VeryLazy",
+		config = function()
+			require('mini.files').setup()
+		end
+	},
+
+	{
+		"echasnovski/mini.bracketed",
+		event = "VeryLazy",
+		config = function()
+			require('mini.bracketed').setup()
+		end
+	},
+
+	{
+		"echasnovski/mini.ai",
+		event = "VeryLazy",
+		config = function()
+			require('mini.ai').setup()
 		end
 	},
 }

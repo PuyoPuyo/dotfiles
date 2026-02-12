@@ -23,8 +23,6 @@ antidote load "$ANTIDOTEPATH/pluginlist.txt"
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-#======Atuin======
-
 #======Exports======
 # Default editor nvim
 export EDITOR=/opt/homebrew/bin/nvim
@@ -34,6 +32,8 @@ path+=('/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoo
 export PATH
 export TOOLCHAIN_PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/xcodeDefault.xctoolchain
 
+# Nvim as default pager
+export MANPAGER="nvim -c 'Man!' -"
 
 # Fzf options
 export FZF_DEFAULT_OPTS="
@@ -56,6 +56,8 @@ alias cls="clear"
 alias md="mkdir"
 alias fzfp="fzf --preview 'bat --color=always {}'"
 alias f='cd $(fd --type directory | fzf --preview "tree -C {}")'
+alias mds_off="sudo mdutil -a -i off"
+alias mds_on="sudo mdutil -a -i on"
 
 # Add ssh keys to keychain
 eval "$(ssh-add --apple-use-keychain ~/.ssh/id_ed25519)"

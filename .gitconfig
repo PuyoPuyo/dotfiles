@@ -1,10 +1,12 @@
 [alias]
 	p = push
 [user]
-	email = spamfishts@gmail.com
+	email = simeon.tsatskin@cybereason.com
 	name = Simeon
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[url "git@github.com:"]
+	insteadOf = https://github.com/
